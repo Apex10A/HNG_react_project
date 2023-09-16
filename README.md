@@ -1,3 +1,6 @@
+https://apex10a.github.io/HNG_react_project/   this is the hosted link to the website 
+
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).

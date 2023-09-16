@@ -1,0 +1,140 @@
+import React from 'react';
+
+const Movie = ({ movie }) => {
+  const { title, posterPath, imdbRating, tomatoRating, genres, releaseDate } = movie;
+
+  return (
+    <div className=" " data-testid="movie-card">
+      <div className=" ">
+        <img src={posterPath} alt={title} data-testid="movie-poster" />
+      </div>
+      <div className=" ">
+        <h2 data-testid="movie-title">{title}</h2>
+        <p data-testid="movie-release-date">Release Date: {releaseDate}</p>
+        <div className=" " id='rating'>
+          <div className=" " >
+            <img src={imdbRating} alt="IMDB" />
+            <p data-testid="movie-imdb-rating">{imdbRating}</p>
+          </div>
+          <div className=" ">
+            <img src={tomatoRating} alt="Rotten Tomatoes" />
+            <p data-testid="movie-tomato-rating">{tomatoRating}</p>
+          </div>
+        </div>
+        <p data-testid="movie-genres">Genres: {genres.join(', ')}</p>
+      </div>
+    </div>
+  );
+};
+
+export default Movie;
+
+
+
+
+
+
+
+<div>
+      <div className=''>
+        <div></div>
+        <div className='bg'>
+          <Navigation />
+          <div className='px-4 pt-20'>
+            <div>
+              <h1 className='text-white text-5xl w-1/2'>{movies.name}</h1>
+            </div>
+
+            <div className='flex items-center gap-6'>
+              <div className='flex pt-4'>
+                {/* <img src={Imbd} alt="" /> */}
+                <p className='text-white pl-2 '>86.0/100</p>
+              </div>
+
+              <div className='pt-4 flex items-center'>
+                <img src={Tomato} alt="" />
+                <p className='text-white pl-2 '>97%</p>
+              </div>
+            </div>
+          </div>
+
+          <div className='w-[302px]  pt-5 pl-4'>
+            <p className='font-semibold text-white w-[500]'>John Wick is on the run after killing a member of the international assassins' guild, and with a $14 million price tag on his head, he is the target of hit men and women everywhere.</p>
+          </div>
+
+          <div className='pt-4 pl-4 items-center flex'>
+            <div className='bg-red-600 flex items-center px-3 py-2'>
+              <img src={Play} alt="" />
+              <button className='text-white pl-2'>WATCH TRAILER</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+
+import React, { useEffect, useState } from 'react';
+
+const Home = () => {
+  const [topRatedMovies, setTopRatedMovies] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+
+  useEffect(() => {
+    // Replace 'YOUR_API_KEY' with your actual TMDB API key
+    const apiKey = 'cfcc55e83af2fc8c1fc51a68f3221eea';
+    const apiUrl = `https://api.themoviedb.org/3/movie/top_rated?api_key=${apiKey}&page=1`;
+
+    fetch(apiUrl)
+      .then((response) => response.json())
+      .then((data) => {
+        if (data.results && Array.isArray(data.results)) {
+          setTopRatedMovies(data.results);
+          setLoading(false);
+        } else {
+          setError('Invalid API response format');
+          setLoading(false);
+        }
+      })
+      .catch((error) => {
+        setError(error);
+        setLoading(false);
+      });
+  }, []);
+
+  return (
+    <div>
+      {loading ? (
+        <p>Loading...</p>
+      ) : error ? (
+        <p>Error: {error}</p>
+      ) : (
+        <div>
+          <h2>Top Rated Movies</h2>
+          <ul>
+            {topRatedMovies.map((movie) => (
+              <li key={movie.id}>
+                <h3>{movie.title}</h3>
+                <p>Release Date: {movie.release_date}</p>
+                {/* Include other movie details here */}
+              </li>
+            ))}
+          </ul>
+        </div>
+      )}
+    </div>
+  );
+};
+
+export default Home;
+
+
+
+<input
+            type="search"
+            className='rounded-xl py-3 px-4 md:w-[500px] w-full bg-transparent'
+            id="search"
+            name="search"
+            placeholder="What do you want to watch.."
+          />

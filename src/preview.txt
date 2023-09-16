@@ -1,0 +1,2 @@
+    const apiKey = 'cfcc55e83af2fc8c1fc51a68f3221eea';
+    const apiUrl = `https://api.themoviedb.org/3/movie/popular?api_key=${apiKey}&page=1`;
